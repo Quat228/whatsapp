@@ -1,15 +1,20 @@
+import os
 import requests
+from dotenv import load_dotenv
 from fastapi import FastAPI, Request, Response
+
 from functions import WhatsApp, RocketChat
+
+
+load_dotenv()
 
 app = FastAPI()
 
-PHONE_ID = '194838440370104'
+PHONE_ID = os.environ.get("PHONE_ID")
 
-SYSTEM_USER_TOKEN = 'EAAJSUgsWbFABO3QyExEv6tF505I3ZCTuGSq7AEpFOELcz9AzJsDRKd3ylA3Q1oT1nHA4IIwiBBH1s0AWPeWgZBdW' \
-                    '0lcILsHzIJcZC883kAPKlh308kOTwWEzloPeimgfvUrFPT7YI5dOoLerULbrfkt0XMs3OnfpxZCZBzZBOLXGDr5ZCcAjMy' \
-                    'EqabQcY55iJV9'
+SYSTEM_USER_TOKEN = os.environ.get("SYSTEM_USER_TOKEN")
 
+WEBHOOK_TOKEN = os.environ.get("WEBHOOK_TOKEN")
 
 whatsapp = WhatsApp(phone_id=PHONE_ID, token=SYSTEM_USER_TOKEN)
 
