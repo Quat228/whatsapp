@@ -10,6 +10,7 @@ SYSTEM_USER_TOKEN = 'EAAJSUgsWbFABO3QyExEv6tF505I3ZCTuGSq7AEpFOELcz9AzJsDRKd3ylA
                     '0lcILsHzIJcZC883kAPKlh308kOTwWEzloPeimgfvUrFPT7YI5dOoLerULbrfkt0XMs3OnfpxZCZBzZBOLXGDr5ZCcAjMy' \
                     'EqabQcY55iJV9'
 
+
 whatsapp = WhatsApp(phone_id=PHONE_ID, token=SYSTEM_USER_TOKEN)
 
 rocket_chat = RocketChat('http://192.168.0.133:3000')
@@ -62,13 +63,12 @@ async def send_message():
     return Response()
 
 
-@app.post("/webhook_income_whatsapp")
+@app.get("/webhook_income_whatsapp")
 async def webhook_income_whatsapp(request: Request):
-
-    body = await request.json()
-    body_json = await request.body()
-
-    print(body)
+    if request:
+        parameters = request.query_params
+        print(request.json())
+        print(parameters)
 
     return Response()
 
