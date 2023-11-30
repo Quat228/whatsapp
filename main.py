@@ -96,9 +96,9 @@ def webhook_income_whatsapp():
     if request.method == "GET":
         print(request.args.to_dict())
         request_arguments_dict = request.args.to_dict()
-        mode = request_arguments_dict.get(' hub.mode')
-        challenge = request_arguments_dict.get(' hub.challenge')
-        verify_token = request_arguments_dict.get(' hub.verify_token')
+        mode = request_arguments_dict.get('hub.mode')
+        challenge = request_arguments_dict.get('hub.challenge')
+        verify_token = request_arguments_dict.get('hub.verify_token')
         if mode and challenge and verify_token:
             if verify_token == WEBHOOK_TOKEN:
                 return challenge
