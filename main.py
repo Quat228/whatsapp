@@ -97,7 +97,7 @@ def webhook_income_whatsapp():
         print(request.args)
         print(request.json)
         print(request.data)
-        print('hello')
+        print('hello2')
     if request.method == "POST":
         print(request.json)
 
