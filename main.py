@@ -14,7 +14,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-PHONE_ID = os.getenv("PHONE_ID")
+PHONE_ID = os.environ.get("PHONE_ID")
 
 SYSTEM_USER_TOKEN = os.environ.get("SYSTEM_USER_TOKEN")
 
@@ -70,8 +70,6 @@ def check():
 
 @app.route("/send_message")
 def send_message():
-    print(PHONE_ID)
-    print(SYSTEM_USER_TOKEN)
     url = f'https://graph.facebook.com/v18.0/{PHONE_ID}/messages'
 
     headers = {
@@ -95,10 +93,6 @@ def send_message():
 
 @app.route("/webhook_income_whatsapp")
 def webhook_income_whatsapp():
-
-    parameters = request.args
-    print(request.json())
-    print(parameters)
 
     return 'OK', 200
 
