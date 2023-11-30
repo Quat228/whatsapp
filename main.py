@@ -93,6 +93,9 @@ def send_message():
 @app.route("/webhook_income_whatsapp", methods=['GET', 'POST'])
 def webhook_income_whatsapp():
     if request.method == "GET":
+        print(request.args)
+        print(request.json)
+        print(request.data)
         print('hello')
     if request.method == "POST":
         print(request.json)
