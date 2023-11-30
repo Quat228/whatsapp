@@ -1,14 +1,14 @@
 import os
 import requests
 from dotenv import load_dotenv
-from fastapi import FastAPI, Request, Response
+from flask import Flask, request
 
 from functions import WhatsApp, RocketChat
 
 
 load_dotenv()
 
-app = FastAPI()
+app = Flask(__name__)
 
 PHONE_ID = os.environ.get("PHONE_ID")
 
@@ -21,8 +21,16 @@ whatsapp = WhatsApp(phone_id=PHONE_ID, token=SYSTEM_USER_TOKEN)
 rocket_chat = RocketChat('http://192.168.0.133:3000')
 
 
-@app.get("/check")
-async def check():
+@app.route("/hello")
+def hello_world():
+    if request.method == "POST":
+        print('Hello, friend')
+        return 'Hello, friend'
+    return "<p>Hello, World!</p>"
+
+
+@app.route("/check")
+def check():
 
     url = f'https://graph.facebook.com/v18.0/{PHONE_ID}/messages'
 
@@ -42,11 +50,11 @@ async def check():
 
     print(response.json())
 
-    return Response()
+    return 'OK', 200
 
 
-@app.get("/send_message")
-async def send_message():
+@app.route("/send_message")
+def send_message():
     url = f'https://graph.facebook.com/v18.0/{PHONE_ID}/messages'
 
     headers = {
@@ -65,25 +73,26 @@ async def send_message():
 
     print(response.json())
 
-    return Response()
+    return 'OK', 200
 
 
-@app.get("/webhook_income_whatsapp")
-async def webhook_income_whatsapp(request: Request):
-    if request:
-        parameters = request.query_params
-        print(request.json())
-        print(parameters)
+@app.route("/webhook_income_whatsapp")
+def webhook_income_whatsapp():
 
-    return Response()
+    parameters = request.args
+    print(request.json())
+    print(parameters)
+
+    return 'OK', 200
 
 
-@app.post('/webhook_outgoing_whatsapp')
-async def webhook_outgoing_whatsapp(request: Request):
+@app.route('/webhook_outgoing_whatsapp')
+def webhook_outgoing_whatsapp():
 
-    body = await request.json()
-    body_json = await request.body()
+    body = request.json()
 
     print(body)
 
-    return Response()
+    return 'OK', 200
+
+app.run()
