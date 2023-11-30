@@ -70,6 +70,8 @@ def check():
 
 @app.route("/send_message")
 def send_message():
+    print(PHONE_ID)
+    print(SYSTEM_USER_TOKEN)
     url = f'https://graph.facebook.com/v18.0/{PHONE_ID}/messages'
 
     headers = {
