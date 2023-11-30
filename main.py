@@ -1,5 +1,6 @@
 import os
 import logging
+import git
 import requests
 from dotenv import load_dotenv
 from flask import Flask, request
