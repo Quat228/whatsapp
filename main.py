@@ -1,6 +1,5 @@
 import os
 import logging
-import git
 import requests
 from dotenv import load_dotenv
 from flask import Flask, request
@@ -91,10 +90,12 @@ def send_message():
     return 'OK', 200
 
 
-@app.route("/webhook_income_whatsapp")
+@app.route("/webhook_income_whatsapp", methods=['GET', 'POST'])
 def webhook_income_whatsapp():
-
-    print(request.json())
+    if request.method == "GET":
+        print('hello')
+    if request.method == "POST":
+        print(request.json)
 
     return 'OK', 200
 
