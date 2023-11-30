@@ -94,6 +94,8 @@ def send_message():
 @app.route("/webhook_income_whatsapp")
 def webhook_income_whatsapp():
 
+    print(request.json())
+
     return 'OK', 200
 
 
