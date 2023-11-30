@@ -14,7 +14,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-PHONE_ID = os.environ.get("PHONE_ID")
+PHONE_ID = os.getenv("PHONE_ID")
 
 SYSTEM_USER_TOKEN = os.environ.get("SYSTEM_USER_TOKEN")
 
