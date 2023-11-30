@@ -30,7 +30,7 @@ def hello_world():
     if request.method == "POST":
         print('Hello, friend')
         return 'Hello, friend'
-    return "Hello, World 3!"
+    return "Hello, World 4!"
 
 
 @app.route('/update_server', methods=['POST'])
