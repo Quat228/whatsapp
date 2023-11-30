@@ -1,9 +1,13 @@
 import os
+import logging
+import git
 import requests
 from dotenv import load_dotenv
 from flask import Flask, request
 
 from functions import WhatsApp, RocketChat
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 load_dotenv()
@@ -21,12 +25,12 @@ whatsapp = WhatsApp(phone_id=PHONE_ID, token=SYSTEM_USER_TOKEN)
 rocket_chat = RocketChat('http://192.168.0.133:3000')
 
 
-@app.route("/hello")
+@app.route("/")
 def hello_world():
     if request.method == "POST":
         print('Hello, friend')
         return 'Hello, friend'
-    return "<p>Hello, World!</p>"
+    return "Hello, World!"
 
 
 @app.route("/check")
@@ -94,5 +98,3 @@ def webhook_outgoing_whatsapp():
     print(body)
 
     return 'OK', 200
-
-app.run()
